@@ -1,11 +1,10 @@
 import { galleryItems } from "./gallery-items.js";
 // Change code below this line
 const gallContainer = document.querySelector(".gallery");
-const gallLinks = document.querySelector(".gallery__link");
 const pictureMarkup = creatGallMarkup(galleryItems);
 
-gallContainer.insertAdjacentHTML("beforebegin", pictureMarkup);
-gallLinks.addEventListener("click", onGallClick);
+gallContainer.insertAdjacentHTML("afterbegin", pictureMarkup);
+gallContainer.addEventListener("click", onClick);
 
 // 1. Створення і рендер розмітки по масиву данних galleryItems і представленому шаблону елемента галереї.
 
@@ -30,13 +29,36 @@ function creatGallMarkup(items) {
 
 // 2. Реалізація делегіровання на div.gallery і отримання url великого зображення.
 
-function onGallClick(evt) {
-  evt.preventDefault();
-  console.log();
-  const isGallImageEl = evt.target.classList.contains("gallery__image");
-  if (!isGallImageEl) {
+let instance;
+
+function onClick(event) {
+  event.preventDefault();
+
+  const urlSource = event.target.dataset.source;
+
+  if (!urlSource) {
     return;
   }
-  const url = evt.target.dataset.source;
-  console.log(url);
+
+  instance = basicLightbox.create(`
+	<img src="${urlSource}"></img>
+`);
+  instance.show();
 }
+
+// 3.Підключення скрипту і стилів бібліотеки модального вікна basicLightbox.
+// Використовуй CDN сервіс jsdelivr і додай у проект посилання на мініфіковані(.min) файли бібліотеки.
+
+// 4. Відкриття модального вікна по кліку на елементі галереї. Для цього ознайомся з документацією і прикладами.
+
+// 5. Заміна значення атрибута src елемента <img> в модальному вікні перед відкриттям.
+// Використовуй готову розмітку модального вікна із зображенням з прикладів бібліотеки basicLightbox.
+
+function closeModal(event) {
+  if (event.key !== "Escape" || !instance) {
+    return;
+  }
+  instance.close();
+}
+
+document.addEventListener("keydown", closeModal);
