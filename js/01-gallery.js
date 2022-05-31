@@ -40,7 +40,8 @@ function onClick(event) {
     return;
   }
 
-  instance = basicLightbox.create(`
+  // бібліотека
+  instance = basicLightbox.create(` 
 	<img src="${urlSource}"></img>
 `);
   instance.show();
