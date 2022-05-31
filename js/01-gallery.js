@@ -60,6 +60,7 @@ function closeModal(event) {
     return;
   }
   instance.close();
+  console.log(instance);
 }
 
 document.addEventListener("keydown", closeModal);
