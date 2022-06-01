@@ -20,7 +20,6 @@ function creatGallMarkup(items) {
   <img class="gallery__image"
   src="${preview}" 
   alt="${description}"
-  title="${description}"/>
 </a>
 </div>`;
     })
@@ -35,7 +34,10 @@ function creatGallMarkup(items) {
 // 3. Ініціалізація бібліотеки після створення і додання елементів галереї у div.gallery.
 //      Для цього ознайомся з документацією SimpleLightbox - насамперед секції «Usage» і «Markup».
 
-let galleryBox = new SimpleLightbox(".gallery a");
+let galleryBox = new SimpleLightbox(".gallery a", {
+  captionsData: "alt",
+  captionDelay: "250",
+});
 // 4. Подивися в документації секцію «Options» і додай відображення підписів до зображень з атрибута alt.
 //      Нехай підпис буде знизу і з'являється через 250 мілісекунд після відкриття зображення.
 
